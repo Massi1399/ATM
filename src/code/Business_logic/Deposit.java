@@ -41,7 +41,7 @@ public class Deposit extends Transaction
          // request deposit envelope containing specified amount
          screen.displayMessage( 
             "\nPlease insert a deposit envelope containing " );
-         screen.displayDollarAmount( amount );
+         screen.displayDollarAmount( new Euro((long)amount/100 , (long)amount%100));
          screen.displayMessageLine( "." );
 
          // receive deposit envelope
@@ -85,7 +85,7 @@ public class Deposit extends Transaction
          return CANCELED;
       else
       {
-         return ( double ) input / 100; // return dollar amount 
+         return ( double ) input; // return dollar amount 
       } // end else
    } // end method promptForDepositAmount
 } // end class Deposit
