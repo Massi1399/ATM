@@ -4,15 +4,18 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import code.Business_logic.Euro;
+
 public class TestBankDatabase {
     
     //Dati account Test userAccontNumber = 12345, userPIN = 54321
 
     private BankDatabase bankDatabase;
-    
+    private Euro euro;
     @BeforeEach
     public void setUp() {
         bankDatabase = new BankDatabase();
+        euro = new Euro(1000, 0);
     }
 
     @Test
@@ -37,14 +40,14 @@ public class TestBankDatabase {
 
     @Test
     public void credit() {
-        bankDatabase.credit(12345, 100);
-        Assertions.assertEquals(bankDatabase.getTotalBalance(12345).getValore(), 120100);
+        bankDatabase.credit(12345, euro);
+        Assertions.assertEquals(bankDatabase.getTotalBalance(12345).getValore(), 220000);
     }
 
     @Test
     public void debit() {
-        bankDatabase.debit(12345, 100);
-        Assertions.assertEquals(bankDatabase.getTotalBalance(12345).getValore(), 110000);
+        bankDatabase.debit(12345, euro);
+        Assertions.assertEquals(bankDatabase.getTotalBalance(12345).getValore(), 20000);
     }
 
 }
