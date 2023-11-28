@@ -17,14 +17,14 @@ public class CashDispenser
    // simulates dispensing of specified amount of cash
    public void dispenseCash( int amount )
    {
-      int billsRequired = amount / 20; // number of $20 bills required
+      int billsRequired = (amount/100) / 20; // number of $20 bills required
       count -= billsRequired; // update the count of bills
    } // end method dispenseCash
 
    // indicates whether cash dispenser can dispense desired amount
    public boolean isSufficientCashAvailable( int amount )
    {
-      int billsRequired = amount / 20; // number of $20 bills required
+      int billsRequired = (amount/100) / 20; // number of $20 bills required
 
       if ( count >= billsRequired  )
          return true; // enough bills available

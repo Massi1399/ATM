@@ -9,10 +9,10 @@ import code.GUI.Screen;
 
 public class Deposit extends Transaction
 {
-   private double amount; // amount to deposit
+   private Euro amount; // amount to deposit
    private Keypad keypad; // reference to keypad
    private DepositSlot depositSlot; // reference to deposit slot
-   private final static int CANCELED = 0; // constant for cancel option
+   private Euro CANCELED = new Euro(0); // constant for cancel option
 
    // Deposit constructor
    public Deposit( int userAccountNumber, Screen atmScreen, 
@@ -41,7 +41,7 @@ public class Deposit extends Transaction
          // request deposit envelope containing specified amount
          screen.displayMessage( 
             "\nPlease insert a deposit envelope containing " );
-         screen.displayDollarAmount( new Euro((long)amount/100 , (long)amount%100));
+         screen.displayDollarAmount( amount);
          screen.displayMessageLine( "." );
 
          // receive deposit envelope
@@ -53,7 +53,7 @@ public class Deposit extends Transaction
             screen.displayMessageLine( "\nYour envelope has been " + 
                "received.\nNOTE: The money just deposited will not " + 
                "be available until we verify the amount of any " +
-               "enclosed cash and your checks clear." );
+               "enclosed cash and your checks clear" );
             
             // credit account to reflect the deposit
             bankDatabase.credit( getAccountNumber(), amount ); 
@@ -71,21 +71,21 @@ public class Deposit extends Transaction
    } // end method execute
 
    // prompt user to enter a deposit amount in cents 
-   private double promptForDepositAmount()
+   private Euro promptForDepositAmount()
    {
       Screen screen = getScreen(); // get reference to screen
 
       // display the prompt
       screen.displayMessage( "\nPlease enter a deposit amount in " + 
          "CENTS (or 0 to cancel): " );
-      int input = keypad.getInput(); // receive input of deposit amount
+      Euro input = new Euro(keypad.getInput()); // receive input of deposit amount
       
       // check whether the user canceled or entered a valid amount
-      if ( input == CANCELED ) 
+      if ( input.ugualeA(CANCELED) ) 
          return CANCELED;
       else
       {
-         return ( double ) input; // return dollar amount 
+         return input; // return dollar amount 
       } // end else
    } // end method promptForDepositAmount
 } // end class Deposit
