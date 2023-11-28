@@ -50,6 +50,4 @@ public class TestEuro {
     public void testStampa() {
         Assertions.assertEquals("10.0 euro", euro.stampa());
     }
-
-    
 }
